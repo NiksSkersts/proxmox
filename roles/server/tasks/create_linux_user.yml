@@ -19,7 +19,7 @@
         groups: "{{ item.groups | default(omit) }}"
         shell: "{{ item.shell | default('/sbin/nologin')}}"
         system: "{{ item.system | default(false) }}"
-        password: "{{ item.password | default(omit) }}"
+        password: "{{ item.password | default(omit) | password_hash('sha512') }}"
 
     - name: set ssh pub keys
       when: item.ssh_pub is defined
